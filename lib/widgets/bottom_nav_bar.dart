@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class BottomNaviagationBarWidget extends StatelessWidget {
   const BottomNaviagationBarWidget({super.key});
@@ -45,7 +44,7 @@ class BottomNaviagationBarWidget extends StatelessWidget {
 
   Widget buildNavBarIcon(IconData iconWidget, bool hasMarginRight) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 6, right: hasMarginRight ? 50 : 0),
+      padding: EdgeInsets.only(bottom: 8, right: hasMarginRight ? 50 : 0),
       child: Icon(
         iconWidget,
         color: Colors.white,
