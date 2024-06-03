@@ -1,14 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_nft_market/cubit/app_cubit.dart';
 
 // ignore: must_be_immutable
 class BottomNaviagationBarWidget extends StatelessWidget {
-  BottomNaviagationBarWidget(
-      {super.key, required this.onTapClick, required this.selectedNavBarIndex});
+  BottomNaviagationBarWidget({super.key});
 
-  void Function(int index) onTapClick;
-  int selectedNavBarIndex;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,22 +32,18 @@ class BottomNaviagationBarWidget extends StatelessWidget {
                     children: [
                       buildNavBarIcon(
                         false,
-                        context,
                         0,
                       ),
                       buildNavBarIcon(
                         true,
-                        context,
                         1,
                       ),
                       buildNavBarIcon(
                         false,
-                        context,
                         2,
                       ),
                       buildNavBarIcon(
                         false,
-                        context,
                         3,
                       ),
                     ],
@@ -64,27 +59,30 @@ class BottomNaviagationBarWidget extends StatelessWidget {
 
   Widget buildNavBarIcon(
     bool hasMarginRight,
-    BuildContext context,
     int index,
   ) {
-    return GestureDetector(
-      onTap: () {
-        onTapClick(index);
+    return BlocBuilder<AppCubit, AppState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () => context.read<AppCubit>().setSelectedNavBarIndex(index),
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 8, right: hasMarginRight ? 50 : 0),
+            child: Icon(
+              index == 0
+                  ? CupertinoIcons.home
+                  : index == 1
+                      ? CupertinoIcons.chart_bar
+                      : index == 2
+                          ? CupertinoIcons.search
+                          : CupertinoIcons.person,
+              color: index == state.selectedNavBarIndex
+                  ? Colors.white
+                  : Colors.grey,
+              size: 28,
+            ),
+          ),
+        );
       },
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 8, right: hasMarginRight ? 50 : 0),
-        child: Icon(
-          index == 0
-              ? CupertinoIcons.home
-              : index == 1
-                  ? CupertinoIcons.chart_bar
-                  : index == 2
-                      ? CupertinoIcons.search
-                      : CupertinoIcons.person,
-          color: index == selectedNavBarIndex ? Colors.white : Colors.grey,
-          size: 28,
-        ),
-      ),
     );
   }
 }

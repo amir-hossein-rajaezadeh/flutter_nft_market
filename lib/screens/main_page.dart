@@ -1,7 +1,7 @@
-import 'dart:async';
-import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_nft_market/cubit/app_cubit.dart';
 import 'package:flutter_nft_market/screens/home_screen.dart';
 import 'package:flutter_nft_market/screens/shared/build_center_text_widget.dart';
 import 'package:flutter_nft_market/screens/states_screen.dart';
@@ -16,16 +16,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  int selectedScreenIndex = 0;
-  double _genrateRandomInt = 0;
-
   @override
   void initState() {
-    Timer.periodic(const Duration(milliseconds: 400), (Timer t) {
-      setState(() {
-        _genrateRandomInt = Random().nextInt(250) + 50;
-      });
-    });
+    context.read<AppCubit>().genrateRandomInt();
     super.initState();
   }
 
@@ -33,65 +26,61 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.background,
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Center(
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 2100),
-              width: _genrateRandomInt,
-              height: _genrateRandomInt,
-              decoration: BoxDecoration(
-                color: MyColors.blurBackgroundColor,
-                borderRadius: BorderRadius.circular(100),
-              ),
-            ),
-          ),
-          ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-              child: selectedScreenIndex == 0
-                  ? const HomeScreen()
-                  : selectedScreenIndex == 1
-                      ? const StateScreen()
-                      : selectedScreenIndex == 2
-                          ? buildCenterTextWidget("Search Page")
-                          : buildCenterTextWidget("Profile Page"),
-            ),
-          ),
-          BottomNaviagationBarWidget(
-            onTapClick: (int index) {
-              setState(() {
-                selectedScreenIndex = index;
-              });
-            },
-            selectedNavBarIndex: selectedScreenIndex,
-          ),
-          Positioned(
-            bottom: 55,
-            child: GestureDetector(
-              onTap: () {},
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    alignment: Alignment.topCenter,
-                    height: 60,
-                    child: Image.asset(
-                      "assets/images/polygon.png",
-                      color: const Color(0xFF512278),
-                    ),
+      body: BlocBuilder<AppCubit, AppState>(
+        builder: (context, state) {
+          return Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Center(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 2100),
+                  width: state.genratedRandomInt,
+                  height: state.genratedRandomInt,
+                  decoration: BoxDecoration(
+                    color: MyColors.blurBackgroundColor,
+                    borderRadius: BorderRadius.circular(100),
                   ),
-                  const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 40,
-                  )
-                ],
+                ),
               ),
-            ),
-          )
-        ],
+              ClipRRect(
+                child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                    child: state.selectedNavBarIndex == 0
+                        ? const HomeScreen()
+                        : state.selectedNavBarIndex == 1
+                            ? const StateScreen()
+                            : state.selectedNavBarIndex == 2
+                                ? buildCenterTextWidget("Search Page")
+                                : buildCenterTextWidget("Profile Page")),
+              ),
+              BottomNaviagationBarWidget(),
+              Positioned(
+                bottom: 55,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        height: 60,
+                        child: Image.asset(
+                          "assets/images/polygon.png",
+                          color: const Color(0xFF512278),
+                        ),
+                      ),
+                      const Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: 40,
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
   }

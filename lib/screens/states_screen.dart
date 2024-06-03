@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nft_market/models/app_models.dart';
 import 'package:flutter_nft_market/screens/shared/build_center_text_widget.dart';
@@ -68,7 +69,7 @@ class _StateScreenState extends State<StateScreen>
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.only(top: 80),
+            margin: const EdgeInsets.only(top: kIsWeb ? 30 : 80),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -140,7 +141,7 @@ class _StateScreenState extends State<StateScreen>
       margin: const EdgeInsets.only(top: 24),
       child: Column(
         children: [
-          _buildCategoriesWIdget(),
+          _buildCategoriesWidget(),
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(
@@ -256,7 +257,7 @@ class _StateScreenState extends State<StateScreen>
     );
   }
 
-  Container _buildCategoriesWIdget() {
+  Container _buildCategoriesWidget() {
     return Container(
       margin: const EdgeInsets.only(right: 20, left: 20),
       child: Row(
@@ -275,13 +276,13 @@ class _StateScreenState extends State<StateScreen>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      CupertinoIcons.link,
+                    const ImageIcon(
+                      AssetImage("assets/icons/category.png"),
+                      size: 30,
                       color: Colors.white,
-                      size: 20,
                     ),
                     Container(
-                      margin: const EdgeInsets.only(right: 6, left: 6),
+                      margin: const EdgeInsets.only(right: 4, left: 4),
                       child: const Text(
                         "All categories",
                         style: TextStyle(
@@ -292,7 +293,7 @@ class _StateScreenState extends State<StateScreen>
                     ),
                     const Icon(
                       Icons.keyboard_arrow_down,
-                      size: 30,
+                      size: 25,
                       color: Colors.white,
                     )
                   ],
@@ -310,51 +311,34 @@ class _StateScreenState extends State<StateScreen>
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: MyColors.borderColor),
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  right: 0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      CupertinoIcons.link,
-                      color: Colors.white,
-                      size: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    CupertinoIcons.link,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 8, left: 8),
+                    child: const Text(
+                      "All chains",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 6, left: 6),
-                      child: const Text(
-                        "All chains",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                      size: 30,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
+                  ),
+                  const Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 25,
+                    color: Colors.white,
+                  )
+                ],
               ),
             ),
           )
         ],
-      ),
-    );
-  }
-
-  Container _buildListTitleWidget(String titleValue) {
-    return Container(
-      margin: const EdgeInsets.only(left: 20, top: 25),
-      alignment: Alignment.topLeft,
-      child: Text(
-        titleValue,
-        style: const TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
       ),
     );
   }

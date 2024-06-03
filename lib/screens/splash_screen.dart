@@ -85,9 +85,14 @@ class SplashScreen extends StatelessWidget {
                                     onTap: () {
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MainPage(),
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
+                                              MainPage(),
+                                          transitionDuration:
+                                              Duration(milliseconds: 400),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
                                         ),
                                       );
                                     },
