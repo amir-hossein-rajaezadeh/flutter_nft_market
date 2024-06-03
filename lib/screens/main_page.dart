@@ -1,9 +1,12 @@
+import 'dart:async';
+import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_nft_market/screens/home_screen.dart';
+import 'package:flutter_nft_market/screens/shared/build_center_text_widget.dart';
 import 'package:flutter_nft_market/screens/states_screen.dart';
 import 'package:flutter_nft_market/utils/my_colors.dart';
-import 'package:flutter_nft_market/widgets/bottom_nav_bar.dart';
+import 'package:flutter_nft_market/screens/shared/bottom_nav_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,7 +16,18 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  int selectedScreen = 0;
+  int selectedScreenIndex = 0;
+  double _genrateRandomInt = 0;
+
+  @override
+  void initState() {
+    Timer.periodic(const Duration(milliseconds: 400), (Timer t) {
+      setState(() {
+        _genrateRandomInt = Random().nextInt(250) + 50;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +37,10 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         alignment: Alignment.bottomCenter,
         children: [
           Center(
-            child: Container(
-              width: 215,
-              height: 215,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 2100),
+              width: _genrateRandomInt,
+              height: _genrateRandomInt,
               decoration: BoxDecoration(
                 color: MyColors.blurBackgroundColor,
                 borderRadius: BorderRadius.circular(100),
@@ -34,16 +49,23 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           ),
           ClipRRect(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 80, sigmaY: 80),
-              child: selectedScreen == 0 ? const HomeScreen() : StateScreen(),
+              filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+              child: selectedScreenIndex == 0
+                  ? const HomeScreen()
+                  : selectedScreenIndex == 1
+                      ? const StateScreen()
+                      : selectedScreenIndex == 2
+                          ? buildCenterTextWidget("Search Page")
+                          : buildCenterTextWidget("Profile Page"),
             ),
           ),
           BottomNaviagationBarWidget(
-            onTapClick: () {
+            onTapClick: (int index) {
               setState(() {
-                selectedScreen = 1;
+                selectedScreenIndex = index;
               });
             },
+            selectedNavBarIndex: selectedScreenIndex,
           ),
           Positioned(
             bottom: 55,
@@ -57,6 +79,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                     height: 60,
                     child: Image.asset(
                       "assets/images/polygon.png",
+                      color: const Color(0xFF512278),
                     ),
                   ),
                   const Icon(

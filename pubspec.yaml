@@ -63,6 +63,10 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/images/nft/nfts/
+    - assets/images/nft/artists/
+
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
