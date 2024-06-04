@@ -1,13 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nft_market/cubit/app_cubit.dart';
 import 'package:flutter_nft_market/models/app_models.dart';
 import '../utils/my_colors.dart';
 
 class DetailScreen extends StatefulWidget {
-  const DetailScreen({super.key});
+  DetailScreen({super.key, required this.nftItem});
+  final NFTModel nftItem;
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
@@ -20,8 +22,6 @@ class _DetailScreenState extends State<DetailScreen> {
     super.initState();
   }
 
-  NFTModel nftItem = AppModels().getTrendingNFTList()[0];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,162 +29,232 @@ class _DetailScreenState extends State<DetailScreen> {
       body: BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
           return Stack(
-            alignment: Alignment.bottomCenter,
             children: [
-              // Center(
-              //   child: GestureDetector(
-              //     onTap: () {
-              //       Navigator.pop(context);
-              //     },
-              //     child: Icon(
-              //       Icons.arrow_back,
-              //       color: Colors.white,
-              //       size: 40,
-              //     ),
-              //   ),
-              // ),
-              // Center(
-              //   child: AnimatedContainer(
-              //     duration: const Duration(milliseconds: 2100),
-              //     width: state.genratedRandomInt,
-              //     height: state.genratedRandomInt,
-              //     decoration: BoxDecoration(
-              //       color: MyColors.blurBackgroundColor,
-              //       borderRadius: BorderRadius.circular(100),
-              //     ),
-              //   ),
-              // ),
+              Center(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 1900),
+                  width: state.genratedRandomInt,
+                  height: state.genratedRandomInt,
+                  decoration: BoxDecoration(
+                    color: MyColors.blurBackgroundColor,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+              ),
               ClipRRect(
-                child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Hero(
-                          tag: "false0a",
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-                              child: Container(
-                                width: 180,
+                  child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Hero(
+                        tag: widget.nftItem.title,
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          height: 350,
+                          child: Stack(
+                            alignment: Alignment.topLeft,
+                            children: [
+                              Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.grey.shade800.withOpacity(0.25),
-                                  border:
-                                      Border.all(color: Colors.grey.shade800),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      widget.nftItem.image,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                child: Column(
+                                child: BackdropFilter(
+                                  filter:
+                                      ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                  child: Center(
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 80),
+                                      width: 230,
+                                      height: 230,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(32),
+                                        image: DecorationImage(
+                                            image: AssetImage(
+                                                widget.nftItem.image),
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    left: 16, top: 55, right: 16),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 9),
-                                      width: 160,
-                                      height: 160,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(22),
-                                        child: Image.asset(
-                                          nftItem.image,
-                                          fit: BoxFit.cover,
+                                    GestureDetector(
+                                      onTap: () => Navigator.pop(context),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: Colors.black.withOpacity(0.22),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 2, sigmaY: 2),
+                                            child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Text(
+                                                  String.fromCharCode(Icons
+                                                      .arrow_back.codePoint),
+                                                  style: TextStyle(
+                                                    inherit: false,
+                                                    fontSize: 24,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w800,
+                                                    fontFamily: Icons
+                                                        .arrow_back.fontFamily,
+                                                  ),
+                                                )),
+                                          ),
                                         ),
                                       ),
                                     ),
                                     Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 10, right: 20, left: 20),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              nftItem.title,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.w700,
-                                                  fontSize: 14,
-                                                  color: Colors.white),
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: Colors.black.withOpacity(0.28),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 8, sigmaY: 8),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Icon(
+                                              CupertinoIcons.heart_fill,
+                                              color: Colors.red,
+                                              size: 24,
                                             ),
-                                            if (true)
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 3),
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      margin:
-                                                          const EdgeInsets.only(
-                                                              right: 2),
-                                                      child: const Icon(
-                                                        CupertinoIcons
-                                                            .heart_fill,
-                                                        color: Colors.red,
-                                                        size: 18,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      nftItem.likeCount
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors
-                                                              .grey.shade500),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     )
                                   ],
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(Icons.arrow_back))
-                      ],
-                    )),
-              ),
-              // BottomNaviagationBarWidget(
-              //   onTapClick: (int index) {
-              //     setState(() {
-              //       selectedScreenIndex = index;
-              //     });
-              //   },
-              //   selectedNavBarIndex: selectedScreenIndex,
-              // ),
-              // Positioned(
-              //   bottom: 55,
-              //   child: GestureDetector(
-              //     onTap: () {},
-              //     child: Stack(
-              //       alignment: Alignment.center,
-              //       children: [
-              //         Container(
-              //           alignment: Alignment.topCenter,
-              //           height: 60,
-              //           child: Image.asset(
-              //             "assets/images/polygon.png",
-              //             color: const Color(0xFF512278),
-              //           ),
-              //         ),
-              //         const Icon(
-              //           Icons.add,
-              //           color: Colors.white,
-              //           size: 40,
-              //         )
-              //       ],
-              //     ),
-              //   ),
-              // )
+                      ),
+                      Expanded(
+                        child: Container(
+                          // height: 580,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(22),
+                            color: Colors.grey.shade800.withOpacity(0.3),
+                          ),
+                          child: ListView(
+                            padding: EdgeInsets.only(top: 0),
+                            children: [
+                              Container(
+                                alignment: Alignment.bottomCenter,
+                                margin: EdgeInsets.only(
+                                    top: 30, left: 18, right: 20),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          widget.nftItem.title,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 28,
+                                              fontWeight: FontWeight.w800),
+                                        ),
+                                      ],
+                                    ),
+                                    if (widget.nftItem.price != null)
+                                      Container(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  width: 18,
+                                                  height: 20,
+                                                  margin: const EdgeInsets.only(
+                                                      right: 2),
+                                                  child: Image.asset(
+                                                    "assets/images/eth_logo.png",
+                                                    fit: BoxFit.cover,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  widget.nftItem.price
+                                                      .toString(),
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      color: Colors.white,
+                                                      fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              "${widget.nftItem.changePercent.toString()}%",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: widget
+                                                          .nftItem.isOnBenefit!
+                                                      ? Colors.green
+                                                      : Colors.red,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      top: 8, right: 20, left: 20, bottom: 14),
+                                  child: Text(
+                                    widget.nftItem.desc!,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                      height: 1.7,
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )),
             ],
           );
         },

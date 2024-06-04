@@ -120,24 +120,20 @@ class _HomeScreeneState extends State<HomeScreen>
             padding: const EdgeInsets.only(left: 10),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return DetailScreen();
-                  },
-                ));
-
-                //  Navigator.push(
-                //   context,
-                //   PageRouteBuilder(
-                //     pageBuilder: (_, __, ___) => DetailScreen(),
-                //     transitionDuration: Duration(milliseconds: 400),
-                //     transitionsBuilder: (_, a, __, c) =>
-                //         FadeTransition(opacity: a, child: c),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => DetailScreen(
+                      nftItem: nftItem,
+                    ),
+                    transitionDuration: Duration(milliseconds: 250),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ),
+                );
               },
               child: Hero(
-                tag: isArtist.toString() + index.toString() + "a",
+                tag: nftItem.title,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: BackdropFilter(
