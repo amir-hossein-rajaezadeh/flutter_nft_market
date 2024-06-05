@@ -14,8 +14,10 @@ class AppCubit extends Cubit<AppState> {
         );
 
   void genrateRandomInt() {
-    Timer.periodic(const Duration(milliseconds: 200), (Timer t) {
-      emit(state.copyWith(genratedRandomInt: Random().nextInt(500) + 30));
+    Timer.periodic(const Duration(milliseconds: 500), (Timer t) {
+      emit(
+        state.copyWith(genratedRandomInt: Random().nextInt(500) + 30),
+      );
     });
   }
 
