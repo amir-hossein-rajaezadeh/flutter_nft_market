@@ -1,8 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_nft_market/cubit/app_cubit.dart';
 import 'package:flutter_nft_market/models/app_models.dart';
@@ -26,137 +24,46 @@ class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyColors.background,
-        body: BlocBuilder<AppCubit, AppState>(builder: (context, state) {
-          return Stack(children: [
-            Center(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 2200),
-                width: state.genratedRandomInt,
-                height: state.genratedRandomInt,
-                decoration: BoxDecoration(
-                  color: MyColors.blurBackgroundColor,
-                  borderRadius: BorderRadius.circular(100),
+      backgroundColor: MyColors.background,
+      body: BlocBuilder<AppCubit, AppState>(
+        builder: (context, state) {
+          return Stack(
+            children: [
+              Center(
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 2200),
+                  width: state.genratedRandomInt,
+                  height: state.genratedRandomInt,
+                  decoration: BoxDecoration(
+                    color: MyColors.blurBackgroundColor,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
                 ),
               ),
-            ),
-            ClipRRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
-                child: Container(),
+              ClipRRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+                  child: Container(),
+                ),
               ),
-            ),
-            CustomScrollView(
+              CustomScrollView(
                 scrollBehavior: CupertinoScrollBehavior(),
                 slivers: <Widget>[
-                  SliverAppBar(
-                    backgroundColor: Colors.transparent,
-                    iconTheme:
-                        CupertinoIconThemeData(color: Colors.transparent),
-                    expandedHeight: 280.0,
-                    flexibleSpace: Stack(
-                      children: [
-                        ImageFiltered(
-                          imageFilter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(widget.nftItem.image),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Hero(
-                          tag: widget.nftItem.title,
-                          child: Center(
-                            child: Container(
-                              margin: EdgeInsets.only(top: 65),
-                              width: 220,
-                              height: 220,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(widget.nftItem.image),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(33),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: 16, top: 55, right: 16),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () => Navigator.pop(context),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color: Colors.black.withOpacity(0.22),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: BackdropFilter(
-                                      filter: ImageFilter.blur(
-                                          sigmaX: 2, sigmaY: 2),
-                                      child: Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text(
-                                            String.fromCharCode(
-                                                Icons.arrow_back.codePoint),
-                                            style: TextStyle(
-                                              inherit: false,
-                                              fontSize: 24,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w800,
-                                              fontFamily:
-                                                  Icons.arrow_back.fontFamily,
-                                            ),
-                                          )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: Colors.black.withOpacity(0.28),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Icon(
-                                        CupertinoIcons.heart_fill,
-                                        color: Colors.red,
-                                        size: 24,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  AppBarWidget(context),
                   SliverPadding(
-                    padding: EdgeInsets.only(top: 16),
+                    padding: EdgeInsets.only(top: 18),
                     sliver: DecoratedSliver(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(22),
-                          color: Colors.grey.shade800.withOpacity(0.3),
-                        ),
-                        sliver: SliverFillRemaining(
-                          hasScrollBody: true,
-                          child: Column(children: [
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.grey.shade800.withOpacity(0.3),
+                      ),
+                      sliver: SliverFillRemaining(
+                        hasScrollBody: true,
+                        fillOverscroll: true,
+                        child: ListView(
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(top: 0),
+                          children: [
                             Container(
                               alignment: Alignment.bottomCenter,
                               margin:
@@ -235,11 +142,112 @@ class _DetailScreenState extends State<DetailScreen> {
                                 ),
                               ),
                             )
-                          ]),
-                        )),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ])
-          ]);
-        }));
+                ],
+              )
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  SliverAppBar AppBarWidget(BuildContext context) {
+    return SliverAppBar(
+      backgroundColor: Colors.transparent,
+      iconTheme: CupertinoIconThemeData(color: Colors.transparent),
+      expandedHeight: 280.0,
+      flexibleSpace: Stack(
+        children: [
+          ImageFiltered(
+            imageFilter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(widget.nftItem.image),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Hero(
+            tag: widget.nftItem.title,
+            child: Center(
+              child: Container(
+                margin: EdgeInsets.only(top: 65),
+                width: 220,
+                height: 220,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(widget.nftItem.image),
+                      fit: BoxFit.cover),
+                  borderRadius: BorderRadius.circular(33),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 16, top: 55, right: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.black.withOpacity(0.22),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                        child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              String.fromCharCode(Icons.arrow_back.codePoint),
+                              style: TextStyle(
+                                inherit: false,
+                                fontSize: 24,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontFamily: Icons.arrow_back.fontFamily,
+                              ),
+                            )),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Colors.black.withOpacity(0.28),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Icon(
+                          CupertinoIcons.heart_fill,
+                          color: Colors.red,
+                          size: 24,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

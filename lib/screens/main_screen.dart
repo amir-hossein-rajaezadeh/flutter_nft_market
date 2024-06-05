@@ -8,14 +8,14 @@ import 'package:flutter_nft_market/screens/states_screen.dart';
 import 'package:flutter_nft_market/utils/my_colors.dart';
 import 'package:flutter_nft_market/screens/shared/bottom_nav_bar.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
+class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     context.read<AppCubit>().genrateRandomInt();

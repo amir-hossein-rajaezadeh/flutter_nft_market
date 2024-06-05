@@ -22,7 +22,7 @@ class AppModels {
           likeCount: 997,
           changePercent: 9,
           desc:
-              "Rarible allows users to buy and sell art, collectibles, video game assets and NFTs. You can buy and deal on Rarible with Ethereum, Polygon, Tezos and Immutable X. However, you will be charged fees.An interesting aspect of Rarible: Rather than having in-house management decide everything, Rarible created its own native token called RARI. The holders of RARI get to vote on company decisions like company policy changes. es, video game assets and NFTs. You can buy and deal on Rarible with Ethereum, Polygon, Tezos and Immutable X. However, you will be charged fees.An interesting aspect of Rarible: Rather than having in-house management decide everything, Rarible created its own native token called RARI. The holders of RARI get to vote on company decisions like company policy changes.",
+              "Rarible allows users to buy and sell art, collectibles, video game assets and NFTs. You caner, you will be charged fees.An interesting aspect of Rarible: Rather than having in-house management decide everything, Rarible created its own native token called RARI. The holders of RARI get to vote on company decisions like company policy changes. es, video game um, Polygon, Tezos and Immutable X. However, you will be charged fees.An interesting aspect of Rarible: Rather than having in-house management decide everything, Rarible created its own native token called RARI. The holders of RARI get to vote on company decisions like company policy changes. t, collectibles, video game assets and NFTs. You can buy and deal on Rarible with Ethereum, Polygon, Tezos and Immutable X. However, you will be charged fees.An interesting aspect of Rarible: Rather than having in-house management decide everything, Rarible created its own native token called RARI. The holders of RARI get to vote on company decisions like company policy changes. es, video game assets and NFTs. You can buy and deal on Rarible with Ethereum, Polygon, Tezos and Immutable X. However, you will be charged fees.An interesting aspect of Rarible: Rather than having in-house management decide everything, Rarible created its own native token called RARI. The holders of RARI get to vote on company decisions like company policy changes",
           isOnBenefit: true,
           price: 700),
       NFTModel(
@@ -76,7 +76,7 @@ class AppModels {
           image: "assets/images/nft/nfts/woman.jpeg",
           likeCount: 540,
           desc:
-              "Each NFT marketplace has its own system for how it operates. The types of NFTs available, fees, payment options, permitted blockchains and other rules will depend on which one you use.",
+              "Each NFT marketplace has its own system for how it operates. The types of NFTs available, fees, payment options, permitted blockchains and other rules will depend on which one you use.how it operates. The types of NFTs available, fees, payment options, permitted blockchains and other rules will depend on which one ",
           changePercent: 9,
           price: 700),
     ];
@@ -104,7 +104,7 @@ class AppModels {
           title: "Trevor Jones",
           image: "assets/images/nft/artists/jones.jpeg",
           desc:
-              "Trevor Jones (Kaapstad, 23 maart 1949) is een Zuid-Afrikaanse filmcomponist. Jones studeerde aan de Universiteit van Kaapstad en de Royal Academy of Music in Londen. Hij schreef eind jaren zestig compositie en orkestratie voor de BBC radio en televisie. Hij studeerde ook in de jaren zeventig aan de Universiteit van York in Engeland. Jones begon 1979 muziek te componeren voor films en televisieseries en won twee ASCAP Awards met de films Cliffhanger in 1994 en Notting Hill in 2000.[1]"),
+              "Trevor Jones (Kaapstad, 23 maart 1949) is een Zuid-Afrikaanse filmcomponist. Jones studeerde aan de Universiteit van Kaapstad en de Royal Academy of Music in Londen. Hij schreef eind jaren zestig compositie en orkestratie voor de BBC radio en televisie. Hij studeerde ook in de jaren zeventig aan de Universiteit van York in Engeland. Jones begon 1979 muziek te componeren voor films en televisieseries en won twee ASCAP Awards met de films Cliffhanger in 1994 en Notting Hill in 2000.[1]Zuid-Afrikaanse filmcomponist. Jones studeerde aan de Universiteit van Kaapstad en de Royal Academy of Music in Londen. Hij schreef eind jaren zestig compositie en orkestratie voor de BBC radio en televisie. Hij studeerde ook in de jaren zeventig aan de Universiteit van York in Engeland. Jones begon 1979 muziek te componeren voor films en televisieseries en won twee ASCAP Awards met de films Cliffhanger in 1994 en Notting Hill in 2000.["),
       NFTModel(
           title: "Mad Dog Jones",
           image: "assets/images/nft/artists/mad_dog.png",

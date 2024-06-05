@@ -1,16 +1,25 @@
-# flutter_nft_market
 
-A new Flutter project.
+A  Flutter NFT Market Project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+Note WebApp(PWA) is also avaleble!
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The #flutter_nft_market project has been achieved without using any third-party animation packages and all are made by myself😎 
+In this Project, I have used #flutter_bloc and #equatable as state-maneger.
+For changing app Icon I have use #flutter_launcher_icons.
+
+Open to any countrbution✨
+
+Feel free to forkfork😉
+
+Dont forget to star⭐️
+
+
+## Images:  
+
+![0](docs/screenshots/img0.png) 
+![1](docs/screenshots/img1.png) 
+![2](docs/screenshots/img2.png) 
+![3](docs/screenshots/img3.png) 
