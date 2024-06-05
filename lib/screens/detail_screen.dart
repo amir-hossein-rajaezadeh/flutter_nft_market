@@ -42,7 +42,7 @@ class _DetailScreenState extends State<DetailScreen> {
               ),
               ClipRRect(
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+                  filter: ImageFilter.blur(sigmaX: 900, sigmaY: 900),
                   child: Container(),
                 ),
               ),

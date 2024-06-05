@@ -94,7 +94,7 @@ class SplashScreen extends StatelessWidget {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (_, __, ___) => MainScreen(),
-                            transitionDuration: Duration(milliseconds: 400),
+                            transitionDuration: Duration(milliseconds: 650),
                             transitionsBuilder: (_, a, __, c) =>
                                 FadeTransition(opacity: a, child: c),
                           ),

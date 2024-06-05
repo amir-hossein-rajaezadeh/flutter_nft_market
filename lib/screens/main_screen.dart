@@ -33,7 +33,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
             children: [
               Center(
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 2100),
+                  duration: const Duration(milliseconds: 2200),
                   width: state.genratedRandomInt,
                   height: state.genratedRandomInt,
                   decoration: BoxDecoration(
@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
               ),
               ClipRRect(
                 child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                    filter: ImageFilter.blur(sigmaX: 900, sigmaY: 900),
                     child: state.selectedNavBarIndex == 0
                         ? const HomeScreen()
                         : state.selectedNavBarIndex == 1
